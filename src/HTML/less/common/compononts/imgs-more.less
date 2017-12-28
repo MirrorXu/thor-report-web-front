@@ -1,0 +1,65 @@
+@import "../variables";
+@import "./annotation";
+.imgs_more(){
+	.center();
+	.imgsBox {
+		padding: 20px 0;
+		width: 100%;
+		display: block;
+		.swiper-container {
+			width:100%;
+			margin-left: auto;
+			margin-right: auto;
+			overflow: hidden;
+		}
+
+		.gallery-top {
+			padding-bottom: 20px;
+			.swiper-slide {
+				width: 100%;
+				max-height: 500px;
+			}
+			.swiper-slide-active {
+				//box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+			}
+			.swiper-button-white {
+				padding: 10px;
+				background-color: rgba(0, 0, 0, 0.1);
+				border-radius: 5px;
+			}
+			.swiper-button-white:hover {
+				background-color: rgba(0, 0, 0, 0.4);
+			}
+		}
+		.gallery-thumbs {
+			box-sizing: border-box;
+			border-bottom: 3px solid #dddddd;
+			border-top: 1px solid #dddddd;
+			padding: 20px 50px;
+			.swiper-slide {
+				margin: 10px;
+				width: 15%;
+				opacity: 0.7;
+				border: 1px solid @black-6;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+
+			.swiper-slide-active {
+				opacity: 1;
+				border: 1px solid @blue;
+				transform: scale(1.2);
+				transform-origin: center;
+			}
+		}
+	}
+
+	.imgs_title{
+		.img_title();
+	};
+	.annotation{
+		width: 80%;
+		.annotation();
+	}
+}

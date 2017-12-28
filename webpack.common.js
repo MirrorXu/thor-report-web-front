@@ -2,7 +2,7 @@ const  path = require( 'path' );
 const CleanWebpackPlugin  = require( 'clean-webpack-plugin' );
 const htmlWebpackPlugin = require( 'html-webpack-plugin' );
 
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 // const ExtractCss = new ExtractTextWebpackPlugin('HTML/css/[name]-[chunkhash].css');
 // const ExtractLess = new ExtractTextWebpackPlugin('HTML/css/[name]-[chunkhash].less.css');
 
@@ -15,11 +15,14 @@ const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 module.exports = {
 	entry: {
 		main:'./src/main.js' ,
+		style:'./src/style.js'
+		// test:'./src/test.js'
 	},
 	output: {
-		filename: assetsPath( 'js/[name]-[chunkhash].bundle.js' ),
+		// filename: assetsPath( 'js/[name]-[chunkhash].bundle.js' ),
+		filename: assetsPath( 'js/[name].[hash].bundle.js' ),
+		// filename: assetsPath( 'js/[name].bundle.js' ),
 		path: path.resolve(__dirname, 'dist'),
-		// publicPath: "/"
 	},
 	module: {
 		rules: [
@@ -60,12 +63,27 @@ module.exports = {
 				]
 			},
 			{
-				// test: /\.less$/,
+				test: /\.less$/,
 				// use:ExtractLess.extract({
 				// 	fallback:'style-loader',
 				// 	use:['css-loader'  , 'postcss-loader' , 'less-loader'],
 				// 	// publicPath:'../'
 				// })
+
+				use:[
+					{
+						loader: "style-loader"
+					},
+					{
+						loader: "css-loader"
+					},
+					{
+						loader: "postcss-loader"
+					},
+					{
+						loader: "less-loader"
+					}
+				]
 			},
 			{
 				test:/\.(png|jpg|gif)$/,
@@ -95,26 +113,26 @@ module.exports = {
 		]
 	},
     plugins: [
-	    // ExtractCss ,
-	    // ExtractLess ,
 
-	    new CleanWebpackPlugin('dist'),  // 每次打包以前清理dist文件夹
+	    new CleanWebpackPlugin(['HTML'],{
+			root:path.resolve(__dirname , 'dist'),
+			verbose:true,
+		    exclude:[ 'data']
+	    }),  // 每次打包以前清理dist文件夹
 	    new htmlWebpackPlugin({
-		    title:'htmlwebpackplugin插件参数使用' ,
+		    // title:'html - title' ,
 		    template:'./src/index.html',
 		    filename:'./index.html',
-		    chunks:[
-			    'main'
-		    ],
 		    // favicon:'./src/favicon/favicon.ico',
 		    showErrors:true,
 		    minify:{
 			    // caseSensitive:false , // 是否大小写不敏感
 			    removeComments:true,  // 去除注释
 			    removeEmptyAttributes: true , // 去除空属性
-			    // collapseWhitespace:true // 是否去除空格
+			    collapseWhitespace:true // 是否去除空格
 		    },
 		    // hash:true
+		    // chunks:[ 'jQuery' , 'swiper' , 'main' ]
 	    }) ,
 
     ]

@@ -1,0 +1,98 @@
+
+@import "../common/variables.less";
+@import "../common/class.less";
+
+@import "../common/compononts/imgs-more";
+@import "../common/compononts/load_box";
+@import "../common/compononts/imgs_single";
+@import "../common/compononts/table-component";
+
+html{
+	font-size: 20px;
+}
+html, body{
+	width: 100%;
+	height: 100%;
+	font-family: '宋体' ,'sans-self';
+}
+
+.theme-day{
+	min-width: 900px !important;
+	@headerHeight:50px;
+	@navWidth:20%;
+	#header{
+		background: chocolate;
+		position: fixed;
+		height: @headerHeight;
+		width: 100%;
+		overflow: hidden;
+		z-index: 1;
+		display: none;
+	}
+	#nav{
+		position: fixed;
+		width: @navWidth;
+		top: 0;
+		left: 0;
+		background: @blue;
+		height: 100%;
+		padding-top: @headerHeight;
+		z-index: 10;
+		color: @white-1;
+		a{
+			color: white;
+		}
+	}
+	#content{
+		position: fixed;
+		width: 100% - @navWidth;
+		top: 0;
+		height: 100%;
+		right: 0;
+		color: @black;
+		overflow-x: auto;
+		overflow-y: auto;
+		padding-top: @headerHeight + 40px ;
+		padding-left: 3rem;
+		padding-right: 3rem;
+		padding-bottom: 5rem;
+		z-index: 999;
+		background: inherit;
+		//background: @white-1;
+		//opacity: 0.7;
+
+		#report-content{
+			width: 94%;
+			margin-left: auto;
+			margin-right: auto;
+			background: @white;
+			padding: 50px 6%;
+			overflow-x: hidden;
+			.load_box{
+				.load_box();
+			}
+			.imgs_more{
+				margin-top: 5rem;
+				.imgs_more();
+
+			}
+			.table-component{
+				.table-component();
+				margin-top: 5rem;
+
+			}
+			.imgs_single{
+				margin-top: 5rem;
+				.imgs_single();
+			}
+			.title_1{
+				.title_1();
+			}
+			.p{
+				.p();
+				.text-indent-2em();
+			}
+		}
+
+	}
+}

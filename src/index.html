@@ -2,43 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>索真网页化报告</title>
+
+    <script src="HTML/data/nav.js"></script>
+    <script src="HTML/data/content.js"></script>
 </head>
-<body>
-
-<!--注释参数测试-->
-<!--注释参数测试-->
-<!--注释参数测试-->
-
-<div id="box" class="box">
-    minify 参数测试
+<body class="theme-day">
+<div id="header">
 </div>
-
-
-<div class="box2">
-
+<div id="nav">
+    <ul>
+        <li v-for="v in nav">
+            <a :href="v.href"> <span class="fa fa-heart"></span> {{ v.title }}</a>
+        </li>
+    </ul>
 </div>
+<div id="content" >
 
-<div class="ball">
 
+    <div id="report-content" v-html="contentHtml">
+
+    </div>
 </div>
-
-
-<div class="font">
-    <span class="fa fa-address-book"></span>
-</div>
-
-<div class="json">
-
-</div>
-
-<button class="btn">
-
-</button>
-
-<br>
-<div class="mathBox"></div>
-
-<div class="lessBox"></div>
 </body>
 </html>

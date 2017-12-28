@@ -1,64 +1,78 @@
 
-// css
-import  './HTML/font/css/font-awesome.min.css' ;
-import  './HTML/css/index.css';
-
-// less
-// import './less/index.less';
-
-// import
-
-
-// json
-
-const  data = require('./HTML/data/data.json');
-
-
-
-// js module
-import '../node_modules/jquery/dist/jquery.min.js';
-
-import print from './HTML/js/print'
-
 const $ = require('jquery');
+window.$ = $;
+window.jQuery = $;
+
+require('./HTML/lib/Swiper-3.4.2/dist/js/swiper.jquery.min.js');
+
+import Vue from '../node_modules/vue/dist/vue';
 
 
+let app_content = new Vue({
+	el: '#content',
+	data: {
+		contentHtml: '数据加载中',
+	},
+	methods: {
+		render: function () {
+			$.each($('.imgsBox'), function (i, v) {
 
-console.log("-----------------------------------------");
-
-console.log("-----------------------------------------");
-
-
-
-// const print = require('./js/print');
-
-
-import { cube } from './HTML/js/math.js';
-
-
-setTimeout(function () {
-	$('body').addClass('bgGreen');
-
-	$('.box').removeClass('blur');
+				let tempIdTop = 'galleryTop-' + i;
+				let tempIdThumbs = 'tempIdThumbs-' + i;
 
 
-} , 2000);
+				$(v).find('.gallery-top').attr('id', tempIdTop);
+				$(v).find('.gallery-thumbs').attr('id', tempIdThumbs);
 
 
-$(function () {
+				let galleryTop = new Swiper('#' + tempIdTop, {
+					nextButton: '.swiper-button-next',
+					prevButton: '.swiper-button-prev',
+					spaceBetween: 10,
+					speed: 500,
+					// loop:true,
+					grabCursor: true
+				});
+				let galleryThumbs = new Swiper('#' + tempIdThumbs, {
+					spaceBetween: 10,
+					centeredSlides: true,
+					slidesPerView: 'auto',
+					touchRatio: 0.2,
+					slideToClickedSlide: true,
+					grabCursor: true
 
-	$('.box').addClass( 'blur scaleImg');
-
-	$('.json').html( 'via riquire(\'data.json\')' + data.name );
+				});
 
 
-	$('.btn').text('clickMe').on('click' , print).css({
-		'background' : 'red',
-		'padding':'20px',
-		'fontSize':'20px',
-	})
+				galleryTop.params.control = galleryThumbs;
+				galleryThumbs.params.control = galleryTop;
+			});
 
-	$('.mathBox').text(  '5的三次方是：' + cube(5)  )
+			$('.load_btn').on('click', function () {
+				alert($(this).parent().find('.select_box').val());
+				window.open($(this).parent().find('.select_box').val())
+			});
+		}
+	},
+	mounted: function () {
+		let _this = this;
+		if (content) {
+			_this.contentHtml = content;
+		}
 
-});
+	},
+	updated: function () {
+		this.render();
+	}
+
+})
+
+let app_nav = new Vue({
+	el: '#nav',
+	data: {
+		nav: nav,
+	},
+
+})
+
 
