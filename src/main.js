@@ -12,6 +12,7 @@ let app_content = new Vue({
 	el: '#content',
 	data: {
 		contentHtml: '数据加载中',
+		// ImgViewer:'',
 	},
 	methods: {
 		render: function () {
@@ -48,17 +49,26 @@ let app_content = new Vue({
 				galleryThumbs.params.control = galleryTop;
 			});
 
+			let start = 0 ;
 			$('.load_btn').on('click', function () {
-				alert($(this).parent().find('.select_box').val());
-				window.open($(this).parent().find('.select_box').val())
+				if( Date.now() - start > 500){
+					// console.log($(this).parent().find('.select_box').val());
+					window.open($(this).parent().find('.select_box').val());
+				}else{
+					return false
+				}
 			});
-		}
+		},
+		// showImgViewer:function ( v ) {
+		// 	this.ImgViewer =  v;
+		// },
 	},
 	mounted: function () {
 		let _this = this;
 		if (content) {
-			_this.contentHtml = content;
+			_this.contentHtml =  contentData;
 		}
+
 
 	},
 	updated: function () {
@@ -70,9 +80,38 @@ let app_content = new Vue({
 let app_nav = new Vue({
 	el: '#nav',
 	data: {
-		nav: nav,
+		nav: navData,
 	},
 
-})
+});
 
+
+
+window.onload = function () {
+
+	let app_ImgViewer =  new Vue({
+		el:'#ImgViewer' ,
+		data:{
+			ImgViewer:''
+		},
+		methods:{
+
+			showImgViewer:function ( v ) {
+				this.ImgViewer =  v;
+			},
+		}
+	})
+
+
+	$( '.imgs_single img').dblclick(function () {
+
+		let imgPath =  $(this).attr( 'src') ;
+		app_ImgViewer._data.ImgViewer = imgPath;
+	})
+	$( '.gallery-top img').dblclick( function () {
+
+		let imgPath =  $(this).attr( 'src') ;
+		app_ImgViewer._data.ImgViewer = imgPath;
+	} )
+}
 

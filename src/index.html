@@ -11,18 +11,25 @@
 <div id="header">
 </div>
 <div id="nav">
+    <h1>快速导航：</h1>
     <ul>
         <li v-for="v in nav">
-            <a :href="v.href"> <span class="fa fa-heart"></span> {{ v.title }}</a>
+            <h2><a :href=" '#' + v.id">  {{ v.text }}</a></h2>
+            <ul v-if="v.children.length > 0">
+                <li v-for="v in v.children"> <h3><a :href=" '#' + v.id">  {{ v.text }} </a> </h3></li>
+            </ul>
         </li>
     </ul>
 </div>
 <div id="content" >
-
-
     <div id="report-content" v-html="contentHtml">
 
     </div>
+</div>
+<div id="ImgViewer" v-if="ImgViewer" class="img_mask" >
+    <span class="img_mask_close" @click="showImgViewer()" > <i class="fa fa-times"></i> </span>
+    <img :src="ImgViewer" :alt="ImgViewer">
+    <!--<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514528872008&di=ac07738c321858ca1fc58bd08f7915fc&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D1638369582%2C833969089%26fm%3D214%26gp%3D0.jpg" :alt="ImgViewer">-->
 </div>
 </body>
 </html>
