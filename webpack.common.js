@@ -15,8 +15,8 @@ const htmlWebpackPlugin = require( 'html-webpack-plugin' );
 module.exports = {
 	entry: {
 		main:'./src/main.js' ,
-		style:'./src/style.js'
-		// test:'./src/test.js'
+		htmlStyle:'./src/htmlStyle.js',
+		pdfStyle:'./src/pdfStyle.js'
 	},
 	output: {
 		// filename: assetsPath( 'js/[name]-[chunkhash].bundle.js' ),
@@ -120,7 +120,7 @@ module.exports = {
 		    exclude:[ 'data']
 	    }),  // 每次打包以前清理dist文件夹
 	    new htmlWebpackPlugin({
-		    // title:'html - title' ,
+		    title:'网页版报告' ,
 		    template:'./src/index.html',
 		    filename:'./index.html',
 		    // favicon:'./src/favicon/favicon.ico',
@@ -129,11 +129,26 @@ module.exports = {
 			    // caseSensitive:false , // 是否大小写不敏感
 			    removeComments:true,  // 去除注释
 			    removeEmptyAttributes: true , // 去除空属性
-			    collapseWhitespace:true // 是否去除空格
+			    // collapseWhitespace:true // 是否去除空格
 		    },
 		    // hash:true
-		    // chunks:[ 'jQuery' , 'swiper' , 'main' ]
+		    chunks:[ 'main' , 'htmlStyle'  ]
 	    }) ,
+	    new htmlWebpackPlugin({
+		    title:'pdf版报告' ,
+		    template:'./src/index.html',
+		    filename:'./pdf.html',
+		    // favicon:'./src/favicon/favicon.ico',
+		    showErrors:true,
+		    minify:{
+			    // caseSensitive:false , // 是否大小写不敏感
+			    removeComments:true,  // 去除注释
+			    removeEmptyAttributes: true , // 去除空属性
+			    // collapseWhitespace:true // 是否去除空格
+		    },
+		    // hash:true
+		    chunks:[ 'main' , 'pdfStyle' ]
+	    })
 
     ]
 };
