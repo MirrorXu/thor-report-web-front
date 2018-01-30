@@ -16,7 +16,7 @@ module.exports = {
 	entry: {
 		main:'./src/main.js' ,
 		htmlStyle:'./src/htmlStyle.js',
-		pdfStyle:'./src/pdfStyle.js'
+		pdf:'./src/pdf.js'
 	},
 	output: {
 		// filename: assetsPath( 'js/[name]-[chunkhash].bundle.js' ),
@@ -113,12 +113,12 @@ module.exports = {
 		]
 	},
     plugins: [
-
+	    // 每次打包以前清理dist文件夹
 	    new CleanWebpackPlugin(['HTML'],{
 			root:path.resolve(__dirname , 'dist'),
 			verbose:true,
-		    exclude:[ 'data']
-	    }),  // 每次打包以前清理dist文件夹
+		    exclude:[ 'data', 'pdf' ,'imgs']
+	    }),
 	    new htmlWebpackPlugin({
 		    title:'网页版报告' ,
 		    template:'./src/index.html',
@@ -136,7 +136,7 @@ module.exports = {
 	    }) ,
 	    new htmlWebpackPlugin({
 		    title:'pdf版报告' ,
-		    template:'./src/index.html',
+		    template:'./src/pdf.html',
 		    filename:'./pdf.html',
 		    // favicon:'./src/favicon/favicon.ico',
 		    showErrors:true,
@@ -147,7 +147,8 @@ module.exports = {
 			    // collapseWhitespace:true // 是否去除空格
 		    },
 		    // hash:true
-		    chunks:[ 'main' , 'pdfStyle' ]
+		    // chunks:[ 'main' , 'pdfStyle' ]
+		    chunks:['pdf' ]
 	    })
 
     ]
