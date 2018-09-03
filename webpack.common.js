@@ -129,7 +129,7 @@ module.exports = {
 			    // caseSensitive:false , // 是否大小写不敏感
 			    removeComments:true,  // 去除注释
 			    removeEmptyAttributes: true , // 去除空属性
-			    // collapseWhitespace:true // 是否去除空格
+			    collapseWhitespace:true // 是否去除空格
 		    },
 		    // hash:true
 		    chunks:[ 'main' , 'htmlStyle'  ]
@@ -144,7 +144,7 @@ module.exports = {
 			    // caseSensitive:false , // 是否大小写不敏感
 			    removeComments:true,  // 去除注释
 			    removeEmptyAttributes: true , // 去除空属性
-			    // collapseWhitespace:true // 是否去除空格
+			    collapseWhitespace:true // 是否去除空格
 		    },
 		    // hash:true
 		    // chunks:[ 'main' , 'pdfStyle' ]

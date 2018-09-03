@@ -1,7 +1,7 @@
 {
   "name": "thor-report-web-front",
   "version": "1.0.0",
-  "description": "索真报告网页化",
+  "description": "索真报告网页化pdf版和网页版",
   "main": "index.js",
   "scripts": {
     "test": "webpack --config webpack.config.js",

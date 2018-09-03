@@ -2,7 +2,6 @@ import $ from 'jquery';
 
 import Vue from '../node_modules/vue/dist/vue';
 
-
 let content = new Vue({
 	el: '#content',
 	data: {
